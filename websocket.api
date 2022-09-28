@@ -1,0 +1,24 @@
+type (
+	WsReq {
+		Hub string `path:"hub"`
+	}
+
+	ListRes {
+		List []string `json:"list"`
+	}
+
+	CloseReq {
+		Hub string `path:"hub"`
+	}
+)
+
+service websocket {
+	@handler ws
+	get /:hub/ws(WsReq) returns ()
+	
+	@handler list
+	get /list() returns (ListRes)
+	
+	@handler close
+	get /close/:hub(CloseReq) returns ()
+}
